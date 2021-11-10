@@ -7,48 +7,9 @@
     Author URL: http://www.themeforest.net/user/pixinvent
 ==========================================================================================*/
 
-// Wizard tabs with numbers setup
-$(".number-tab-steps").steps({
-    headerTag: "h6",
-    bodyTag: "fieldset",
-    transitionEffect: "fade",
-    titleTemplate: '<span class="step">#index#</span> #title#',
-    labels: {
-        finish: 'Submit'
-    },
-    onFinished: function (event, currentIndex) {
-        alert("Form submitted.");
-    }
-});
 
-// Wizard tabs with icons setup
-$(".icons-tab-steps").steps({
-    headerTag: "h6",
-    bodyTag: "fieldset",
-    transitionEffect: "fade",
-    titleTemplate: '<span class="step">#index#</span> #title#',
-    labels: {
-        finish: 'Submit'
-    },
-    onFinished: function (event, currentIndex) {
-        alert("Form submitted.");
-    }
-});
 
-// Vertical tabs form wizard setup
-$(".vertical-tab-steps").steps({
-    headerTag: "h6",
-    bodyTag: "fieldset",
-    transitionEffect: "fade",
-    stepsOrientation: "vertical",
-    titleTemplate: '<span class="step">#index#</span> #title#',
-    labels: {
-        finish: 'Submit'
-    },
-    onFinished: function (event, currentIndex) {
-        alert("Form submitted.");
-    }
-});
+
 
 // Validate steps wizard
 
@@ -86,7 +47,44 @@ $(".steps-validation").steps({
         return form.valid();
     },
     onFinished: function (event, currentIndex) {
-        alert("Submitted!");
+        var prenom_personne = $('#prenom_personne').val();
+        var nom_personne = $('#nom_personne').val();
+        var sexe = $('#sexe').val();
+        var nom_jeune_fille = $('#nom_jeune_fille').val();
+        var date_naissance = $('#date_naissance').val();
+        var lieu_naissance = $('#lieu_naissance').val();
+        var id_pays = $('#id_pays').val();
+        var nom_pere = $('#nom_pere').val();
+        var nom_mere = $('#nom_mere').val();
+        var nom_prenom_personne_contact = $('#nom_prenom_personne_contact').val();
+        var telephone_personne_contact = $('#telephone_personne_contact').val();
+        var email_personne_contact = $('#email_personne_contact').val();
+        var numero_piece_identite_personne_contact = $('#numero_piece_identite_personne_contact').val();
+        var annee_naissance_personne = $('#annee_naissance_personne').val();
+
+        $.post("store",{
+            nom_personne:nom_personne,
+            prenom_personne:prenom_personne,
+            sexe:sexe,
+            date_naissance:date_naissance,
+            lieu_naissance:lieu_naissance,
+            nom_jeune_fille:nom_jeune_fille,
+            id_pays:id_pays,
+            nom_pere:nom_pere,
+            nom_mere:nom_mere,
+            nom_prenom_personne_contact:nom_prenom_personne_contact,
+            telephone_personne_contact:telephone_personne_contact,
+            email_personne_contact:email_personne_contact,
+            numero_piece_identite_personne_contact:numero_piece_identite_personne_contact,
+            annee_naissance_personne:annee_naissance_personne
+
+        },function(data){
+            var action = data.action;
+            if(action){
+                $(location).attr('href',data.location);
+            }
+        });
+        
     }
 });
 
@@ -108,18 +106,5 @@ $(".steps-validation").validate({
         email: {
             email: true
         }
-    }
-});
-
-
-// Initialize plugins
-// ------------------------------
-
-// Date & Time Range
-$('.datetime').daterangepicker({
-    timePicker: true,
-    timePickerIncrement: 30,
-    locale: {
-        format: 'MM/DD/YYYY h:mm A'
     }
 });

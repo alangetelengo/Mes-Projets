@@ -30,6 +30,18 @@ Route::middleware('auth')->group(function(){
         Route::get('{id}/capture','IdentificationController@capture')->name('identification.capture');
         Route::put('{id}/capture','IdentificationController@capturestore')->name('identification.capture.store');
     });
+
+    Route::prefix('personne')->group(function(){
+        Route::get('/','PersonneController@index')->name('personne.index');
+        Route::get('create','PersonneController@create')->name('personne.create');
+        Route::post('store','PersonneController@store')->name('personne.store');
+        Route::get('{id}/edit','PersonneController@edit')->name('personne.edit');
+        Route::get('{id}/show','PersonneController@show')->name('personne.show');
+        Route::put('{id}/update','PersonneController@update')->name('personne.update');
+        Route::delete('{id}/destroy','PersonneController@destroy')->name('personne.destroy');
+        Route::get('{id}/capture','PersonneController@capture')->name('personne.capture');
+        Route::put('{id}/capture','PersonneController@capturestore')->name('personne.capture.store');
+    });
 });
 
 Route::post('custom-login','DashboardController@login')->name('custom.login');

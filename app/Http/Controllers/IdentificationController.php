@@ -155,13 +155,12 @@ class IdentificationController extends Controller
         if($identification==null){
 
         }
-        $image = $request->photoStore;
+        $image = $request->identification_photo;
         $image = base64_decode($image);
     
         $nom_image = $identification->identifiant_unique.'.jpeg';
         $result = Storage::disk('public')->put($nom_image,$image);
         
-        //$result = file_put_contents(public_path('identifications/').$nom_image, $image);
     
         if($result) {
             $identification->identifiant_photo = $nom_image;
@@ -171,4 +170,6 @@ class IdentificationController extends Controller
             return "echec";
         }
     }
+
+    
 }

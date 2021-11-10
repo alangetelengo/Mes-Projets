@@ -16,7 +16,7 @@ class PaysSeeder extends Seeder
     public function run()
     {
         DB::statement("set foreign_key_checks=0");
-        DB::statement("truncate pays");
+        DB::statement("truncate tr_pays");
         $data = [
             ["code_pays"=>"PAYS01","lib_pays_fr"=>"Afghanistan","lib_pays_eng"=>"Afghanistan","numero_pays"=>"4","code_alpha2"=>"AF","code_alpha3"=>"AFG"],
             ["code_pays"=>"PAYS02","lib_pays_fr"=>"Îles Åland","lib_pays_eng"=>"Åland Islands","numero_pays"=>"248","code_alpha2"=>"AX","code_alpha3"=>"ALA"],

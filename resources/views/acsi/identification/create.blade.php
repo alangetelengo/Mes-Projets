@@ -1,9 +1,9 @@
-@extends('acsi.layout.app')
+@extends("acsi.layout.app")
 @section('title')
-    Ajouter une identification
+    Création identification
 @endsection
 @section('styles')
-<link href="{{asset('file-upload/file-upload-with-preview.min.css')}}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/plugins/forms/wizard.css')}}">
 @endsection
 @section('content')
 <div class="app-content content">
@@ -18,279 +18,197 @@
                         <div class="card">
                             <div class="card-content collpase show">
                                 <div class="card-body">
-                                    <form class="form form-horizontal" method="POST" action="{{route('identification.store')}}">
-                                        @csrf
-                                        <div class="form-body">
-                                            <h4 class="form-section"><i class="ft-user"></i> Information de la personne</h4>
-                                            <div class="form-group row">
-                                                <label class="col-md-3 label-control" for="projectinput1">Prénom *</label>
-                                                <div class="col-md-9 mx-auto">
-                                                    <input type="text" id="projectinput1" class="form-control @error('prenom') is-invalid @enderror" placeholder="Prénom" value="{{old('prenom')}}" name="prenom" required>
-                                                    @error('prenom')
-                                                        <div class="invalid-feedback">
-                                                                {{$message}}
-                                                        </div>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-md-3 label-control" for="projectinput1">Nom *</label>
-                                                <div class="col-md-9 mx-auto">
-                                                    <input type="text" id="projectinput1" class="form-control @error('nom') is-invalid @enderror" placeholder="Nom" value="{{old('nom')}}" name="nom" required>
-                                                    @error('nom')
-                                                        <div class="invalid-feedback">
-                                                                {{$message}}
-                                                        </div>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                         
-                                            <div class="form-group row">
-                                                <label class="col-md-3 label-control" for="projectinput6">Sexe *</label>
-                                                <div class="col-md-9 mx-auto">
-                                                    <select id="projectinput6" name="sexe" class="form-control @error('sexe') is-invalid @enderror" required>
-                                                        <option value="">Choisir le sexe</option>
-                                                        <option value="M" {{"M"==old("sexe") ? "selected":""}}>Masculin</option>
-                                                        <option value="F" {{"F"==old("sexe") ? "selected":""}}>Féminin</option>
-                                                    </select>
-                                                    @error('sexe')
-                                                        <div class="invalid-feedback">
-                                                                {{$message}}
-                                                        </div>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-md-3 label-control" for="projectinput1">Date de naissance *</label>
-                                                <div class="col-md-9 mx-auto">
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <input type="date" value="{{old('date_naissance')}}" id="projectinput1" class="form-control @error('date_naissance') is-invalid @enderror" placeholder="Date de naissance" name="date_naissance">
-                                                            @error('date_naissance')
-                                                                <div class="invalid-feedback">
-                                                                        {{$message}}
-                                                                </div>
-                                                            @enderror
+                                    <!-- Form wizard with step validation section start -->
+                <section id="validation">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Création identifiant</h4>
+                                    <a class="heading-elements-toggle"><i class="la la-ellipsis-h font-medium-3"></i></a>
+                                    
+                                </div>
+                                <div class="card-content collapse show">
+                                    <div class="card-body">
+                                        <form action="#" class="steps-validation wizard-circle">
+
+                                            <!-- Step 1 -->
+                                            <h6>Etape 1</h6>
+                                            <fieldset>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="firstName3">
+                                                                Prénom :
+                                                                {{-- <span class="danger">*</span> --}}
+                                                            </label>
+                                                            <input type="text" class="form-control" id="prenom_personne" name="prenom_personne">
                                                         </div>
                                                     </div>
-                                                    
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-md-3 label-control" for="projectinput1">Lieu de naissance * </label>
-                                                <div class="col-md-9 mx-auto">
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <input type="text" value="{{old('lieu_naissance')}}" id="projectinput1" class="form-control @error('lieu_naissance') is-invalid @enderror" placeholder="Lieu de naissance" name="lieu_naissance">
-                                                            @error('lieu_naissance')
-                                                                <div class="invalid-feedback">
-                                                                        {{$message}}
-                                                                </div>
-                                                            @enderror
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="lastName3">
+                                                                Nom  :
+                                                                <span class="danger">*</span>
+                                                            </label>
+                                                            <input type="text" class="form-control required" id="nom_personne" name="nom_peronne">
                                                         </div>
                                                     </div>
-                                                    
                                                 </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-md-3 label-control" for="projectinput6">Nationalité *</label>
-                                                <div class="col-md-9 mx-auto">
-                                                    <select id="projectinput6" name="pays_id" class="form-control @error('pays_id') is-invalid @enderror" required>
-                                                        <option value="">Choisir une nationalité</option>
-                                                        @forelse ($pays as $pay)
-                                                            <option value="{{$pay->id}}" {{$pay->id==old('pays_id') ? "selected":""}}>{{$pay->lib_pays_fr }}</option>
-                                                        @empty
-                                                            
-                                                        @endforelse
-                                                    </select>
-                                                    @error('pays_id')
-                                                        <div class="invalid-feedback">
-                                                                {{$message}}
-                                                        </div>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-md-3 label-control" for="projectinput1">Etat civil *</label>
-                                                <div class="col-md-9 mx-auto">
-                                                    <select id="projectinput6" name="etat_civils_id" class="form-control @error('etat_civils_id') is-invalid @enderror" required>
-                                                        <option value="">Choisir une option</option>
-                                                        @forelse ($etatcivils as $etatcivil)
-                                                        <option value="{{$etatcivil->id}}" {{$etatcivil->etat_civil==old("etat_civils_id") ? "selected":""}}>{{$etatcivil->etat_civil}}</option>
-                                                        @empty
-                                                            
-                                                        @endforelse
-                                                        
-                                                    </select>
-                                                    @error('etat_civils_id')
-                                                        <div class="invalid-feedback">
-                                                                {{$message}}
-                                                        </div>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-md-3 label-control" for="projectinput6">Type de pièce d'indetité *</label>
-                                                <div class="col-md-9 mx-auto">
-                                                    <select id="projectinput6" name="type_piece" class="form-control @error('type_piece') is-invalid @enderror">
-                                                        <option value="">Choisir le type</option>
-                                                        @forelse ($typeidentites as $typeidentite)
-                                                        <option value="{{$typeidentite->id}}" {{$typeidentite->lib_type_piece_identite==old("type_piece") ? "selected":""}}>{{$typeidentite->lib_type_piece_identite}}</option>
-                                                        @empty
-                                                            
-                                                        @endforelse
-                                                        
-                                                    </select>
-                                                    @error('type_piece')
-                                                        <div class="invalid-feedback">
-                                                                {{$message}}
-                                                        </div>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-md-3 label-control" for="projectinput1">Numéro pièce identité </label>
-                                                <div class="col-md-9 mx-auto">
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <input type="text" value="{{old('numero_piece')}}" id="projectinput1" class="form-control @error('numero_piece') is-invalid @enderror" placeholder="Numéro pièce" name="numero_piece">
-                                                            @error('numero_piece')
-                                                                <div class="invalid-feedback">
-                                                                        {{$message}}
-                                                                </div>
-                                                            @enderror
+
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="emailAddress5">
+                                                                Nom de la jeune fille :
+                                                                {{-- <span class="danger">*</span> --}}
+                                                            </label>
+                                                            <input type="text" class="form-control" id="nom_jeune_fille" name="nom_jeune_fille">
                                                         </div>
                                                     </div>
-                                                    
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-md-3 label-control" for="projectinput1">Téléphone </label>
-                                                <div class="col-md-9 mx-auto">
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <input type="text" value="{{old('phone')}}" id="projectinput1" class="form-control @error('phone') is-invalid @enderror" placeholder="Téléphone" name="phone">
-                                                            @error('phone')
-                                                                <div class="invalid-feedback">
-                                                                        {{$message}}
-                                                                </div>
-                                                            @enderror
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="location">
+                                                                Sexe :
+                                                                <span class="danger">*</span>
+                                                            </label>
+                                                            <select class="custom-select form-control" id="sexe" name="sexe">
+                                                                <option value="">Selectionner</option>
+                                                                <option value="M">Masculin</option>
+                                                                <option value="F">Féminin</option>
+                                                            </select>
                                                         </div>
                                                     </div>
-                                                    
                                                 </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-md-3 label-control" for="projectinput1">Email </label>
-                                                <div class="col-md-9 mx-auto">
-                                                    <input type="email" value="{{old('email')}}" id="projectinput1" class="form-control @error('email') is-invalid @enderror" placeholder="Email" name="email">
-                                                    @error('email')
-                                                        <div class="invalid-feedback">
-                                                                {{$message}}
-                                                        </div>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-md-3 label-control" for="projectinput6">Départements *</label>
-                                                <div class="col-md-9 mx-auto">
-                                                    <select id="departements_id" name="departements_id" class="form-control @error('departements_id') is-invalid @enderror" required>
-                                                        <option value="">Choisir un département</option>
-                                                        @forelse ($departements as $dep)
-                                                            <option value="{{$dep->id}}" {{$dep->id==old('departements_id') ? "selected":""}}>{{$dep->lib_departement }}</option>
-                                                        @empty
-                                                            
-                                                        @endforelse
-                                                    </select>
-                                                    @error('departements_id')
-                                                        <div class="invalid-feedback">
-                                                                {{$message}}
-                                                        </div>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-md-3 label-control" for="projectinput1">Adresse Physique *</label>
-                                                <div class="col-md-9 mx-auto">
-                                                    <input type="text" value="{{old('adresse')}}" id="projectinput1" class="form-control @error('adresse') is-invalid @enderror" placeholder="Adresse" name="adresse" required>
-                                                    @error('adresse')
-                                                        <div class="invalid-feedback">
-                                                                {{$message}}
-                                                        </div>
-                                                    @enderror
-                                                </div>
-                                            </div>
+                                            </fieldset>
 
-                                            <div class="form-group row">
-                                                <label class="col-md-3 label-control" for="projectinput1">Profession *</label>
-                                                <div class="col-md-9 mx-auto">
-                                                    <input type="text" value="{{old('profession')}}" id="projectinput1" class="form-control @error('profession') is-invalid @enderror" placeholder="Profession" name="profession" required>
-                                                    @error('profession')
-                                                        <div class="invalid-feedback">
-                                                                {{$message}}
+                                            <!-- Step 2 -->
+                                            <h6>Etape 2</h6>
+                                            <fieldset>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="proposalTitle3">
+                                                                Date de naissance :
+                                                                {{-- <span class="danger">*</span> --}}
+                                                            </label>
+                                                            <input type="date" class="form-control" id="date_naissance" name="date_naissance">
                                                         </div>
-                                                    @enderror
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group row">
-                                                <label class="col-md-3 label-control" for="projectinput1">Nom du père *</label>
-                                                <div class="col-md-9 mx-auto">
-                                                    <input type="text" value="{{old('nom_pere')}}" id="projectinput1" class="form-control @error('nom_pere') is-invalid @enderror" placeholder="Nom du père" name="nom_pere" required>
-                                                    @error('nom_pere')
-                                                        <div class="invalid-feedback">
-                                                                {{$message}}
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="emailAddress6">
+                                                                    Lieu de naissance :
+                                                                {{-- <span class="danger">*</span> --}}
+                                                            </label>
+                                                            <input type="text" class="form-control" id="lieu_naissance" name="lieu_naissance">
                                                         </div>
-                                                    @enderror
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group row">
-                                                <label class="col-md-3 label-control" for="projectinput1">Nom du mère *</label>
-                                                <div class="col-md-9 mx-auto">
-                                                    <input type="text" value="{{old('nom_mere')}}" id="projectinput1" class="form-control @error('nom_mere') is-invalid @enderror" placeholder="Nom de la mère" name="nom_mere" required>
-                                                    @error('nom_mere')
-                                                        <div class="invalid-feedback">
-                                                                {{$message}}
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="eventType3">
+                                                                Nationnalité :
+                                                                <span class="danger">*</span>
+                                                            </label>
+                                                            <select class="custom-select form-control required" id="id_pays" name="id_pays">
+                                                                <option value="">Selectionner</option>
+                                                                @forelse ($pays as $pay)
+                                                                    <option value="{{$pay->id_pays}}">{{$pay->lib_pays_fr}}</option>
+                                                                @empty
+                                                                    
+                                                                @endforelse
+                                                            </select>
                                                         </div>
-                                                    @enderror
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group row">
-                                                <label class="col-md-3 label-control" for="projectinput1">Personne contact *</label>
-                                                <div class="col-md-9 mx-auto">
-                                                    <input type="text" value="{{old('personne_contact')}}" id="projectinput1" class="form-control @error('personne_contact') is-invalid @enderror" placeholder="Personne contact" name="personne_contact" required>
-                                                    @error('personne_contact')
-                                                        <div class="invalid-feedback">
-                                                                {{$message}}
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="emailAddress6">
+                                                                    Peronne contact :
+                                                                {{-- <span class="danger">*</span> --}}
+                                                            </label>
+                                                            <input type="text" class="form-control" id="nom_prenom_personne_contact" name="nom_prenom_personne_contact">
                                                         </div>
-                                                    @enderror
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            </fieldset>
 
-                                            <div class="form-group row">
-                                                <label class="col-md-3 label-control" for="projectinput1">Téléphone Personne contact *</label>
-                                                <div class="col-md-9 mx-auto">
-                                                    <input type="text" value="{{old('telephone_personne_contact')}}" id="projectinput1" class="form-control @error('telephone_personne_contact') is-invalid @enderror" placeholder="Téléphone personne contact" name="telephone_personne_contact" required>
-                                                    @error('telephone_personne_contact')
-                                                        <div class="invalid-feedback">
-                                                                {{$message}}
+                                            <!-- Step 3 -->
+                                            <h6>Etape 3</h6>
+                                            <fieldset>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="eventName3">
+                                                                Nom père :
+                                                                <span class="danger">*</span>
+                                                            </label>
+                                                            <input type="text" class="form-control required" id="nom_pere" name="nom_pere">
                                                         </div>
-                                                    @enderror
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="eventName3">
+                                                                Nom mère :
+                                                                <span class="danger">*</span>
+                                                            </label>
+                                                            <input type="text" class="form-control required" id="nom_mere" name="nom_mere">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="eventName3">
+                                                                Téléphone personne contact :
+                                                                {{-- <span class="danger">*</span> --}}
+                                                            </label>
+                                                            <input type="text" class="form-control" id="telephone_personne_contact" name="telephone_personne_contact">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="eventName3">
+                                                                Email peronne contact :
+                                                                {{-- <span class="danger">*</span> --}}
+                                                            </label>
+                                                            <input type="email" class="form-control" id="email_personne_contact" name="email_personne_contact">
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            </fieldset>
 
-                                            {{-- <h4 class="form-section"><i class="ft-user"></i> Information de la vaccination</h4> --}}
-                                            
-                                        
-                                        <div class="form-actions">
-                                            <button type="submit" class="btn btn-primary">
-                                                <i class="la la-check-square-o"></i> Sauvegarder
-                                            </button>
-                                            <a href="{{route("identification.index")}}" class="btn btn-warning">Retour</a>
-                                        </div>
-                                    </form>
+                                            <!-- Step 4 -->
+                                            <h6>Step 4</h6>
+                                            <fieldset>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="eventName3">
+                                                                Numéro pièce identité personne contact :
+                                                                {{-- <span class="danger">*</span> --}}
+                                                            </label>
+                                                            <input type="text" class="form-control" id="numero_piece_identite_personne_contact" name="numero_piece_identite_personne_contact">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="eventName3">
+                                                                Année de naissance :
+                                                                {{-- <span class="danger">*</span> --}}
+                                                            </label>
+                                                            <input type="number" class="form-control" id="annee_naissance_personne" name="annee_naissance_personne">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Form wizard with step validation section end -->
                                 </div>
                             </div>
                         </div>
@@ -301,5 +219,9 @@
         </div>
     </div>
 </div>
-<!-- END: Content-->
+@endsection
+@section('scripts')
+    <script src="{{asset('app-assets/vendors/js/extensions/jquery.steps.min.js')}}"></script>
+    <script src="{{asset('app-assets/vendors/js/forms/validation/jquery.validate.min.js')}}"></script>
+    <script src="{{asset('app-assets/js/scripts/forms/wizard-steps.js')}}"></script>
 @endsection

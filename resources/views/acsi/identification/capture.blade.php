@@ -1,6 +1,6 @@
 @extends('acsi.layout.app')
 @section('title')
-    Liste des indentités
+    {{$personne->prenom_personne}}
 @endsection
 @section('styles')
 <link rel="stylesheet" href="{{asset('app-assets/css/components.css')}}">
@@ -21,7 +21,7 @@
                             <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                             <div class="heading-elements">
                                 <ul class="list-inline mb-0">
-                                    <li><a href="#" data-target="#photoModal" data-toggle="modal" class="btn btn-primary" id="accescamera" style="color: white"> <i class="la la-camera"></i> Prendre une photo</a></li>
+                                    <li><a href="#"  class="btn btn-primary" id="accescamera" style="color: white"> <i class="la la-camera"></i> Prendre une photo</a></li>
                                 </ul>
                                 <div class="modal fade" id="photoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
@@ -39,13 +39,13 @@
                                                 <div id="results" class="d-none"></div>
                                                 <form method="post" id="photoForm">
                                                     @method('PUT')
-                                                    <input type="hidden" id="photoStore" name="photoStore" value="">
+                                                    <input type="hidden" id="identification_photo" name="identification_photo" value="">
                                                 </form>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-warning mx-auto text-white" id="takephoto">Prendre la  Photo</button>
-                                                <button type="button" class="btn btn-warning mx-auto text-white d-none" id="retakephoto">Relancer</button>
-                                                <button type="submit" class="btn btn-warning mx-auto text-white d-none" id="uploadphoto" form="photoForm">Terminer</button>
+                                                <button type="button" class="btn btn-warning mx-auto text-white" id="prise">Prendre la  Photo</button>
+                                                <button type="button" class="btn btn-warning mx-auto text-white d-none" id="reprise">Relancer</button>
+                                                <button type="submit" class="btn btn-warning mx-auto text-white d-none" id="miseenligne" form="photoForm">Terminer</button>
                                             </div>
                                         </div>
                                     </div>
@@ -84,31 +84,35 @@
                 icon: 'warning'
             });
         });
+        $('#photoModal').modal({
+            backdrop:'static',
+            keyboard:false
+        });
         Webcam.attach('#macamera');
     });
 
-    $('#takephoto').on('click', take_snapshot);
+    $('#prise').on('click', take_snapshot);
 
-    $('#retakephoto').on('click', function() {
+    $('#reprise').on('click', function() {
         $('#macamera').addClass('d-block');
         $('#macamera').removeClass('d-none');
 
         $('#results').addClass('d-none');
 
-        $('#takephoto').addClass('d-block');
-        $('#takephoto').removeClass('d-none');
+        $('#prise').addClass('d-block');
+        $('#prise').removeClass('d-none');
 
-        $('#retakephoto').addClass('d-none');
-        $('#retakephoto').removeClass('d-block');
+        $('#reprise').addClass('d-none');
+        $('#reprise').removeClass('d-block');
 
-        $('#uploadphoto').addClass('d-none');
-        $('#uploadphoto').removeClass('d-block');
+        $('#miseenligne').addClass('d-none');
+        $('#miseenligne').removeClass('d-block');
     });
 
     $('#photoForm').on('submit', function(e) {
         e.preventDefault();
         $.ajax({
-            url: "{{env('APP_URL')}}/identitication/{{$identification->id}}/capture",
+            url: "{{env('APP_URL')}}/personne/{{$personne->id_personne}}/capture",
             type: "POST",
             data: new FormData(this),
             contentType: false,
@@ -122,14 +126,14 @@
 
                     $('#results').addClass('d-none');
 
-                    $('#takephoto').addClass('d-block');
-                    $('#takephoto').removeClass('d-none');
+                    $('#prise').addClass('d-block');
+                    $('#prise').removeClass('d-none');
 
-                    $('#retakephoto').addClass('d-none');
-                    $('#retakephoto').removeClass('d-block');
+                    $('#reprise').addClass('d-none');
+                    $('#reprise').removeClass('d-block');
 
-                    $('#uploadphoto').addClass('d-none');
-                    $('#uploadphoto').removeClass('d-block');
+                    $('#miseenligne').addClass('d-none');
+                    $('#miseenligne').removeClass('d-block');
 
                     $('#photoModal').modal('hide');
 
@@ -141,12 +145,15 @@
                         closeOnClickOutside: false,
                         closeOnEsc: false,
                         timer: 2000
-                    })
+                    });
+                    // setTimeout(function(){
+                    //     $(location).attr("href","{{route('identification.index')}}");
+                    // },3000);
                 }
                 else {
                     swal({
-                        title: 'Error',
-                        text: 'Something went wrong',
+                        title: 'Erreur',
+                        text: 'Une erreur est survenue',
                         icon: 'error'
                     })
                 }
@@ -163,7 +170,7 @@ function take_snapshot()
         $('#results').html('<img src="' + data_uri + '" class="d-block mx-auto rounded"/>');
 
         var raw_image_data = data_uri.replace(/^data\:image\/\w+\;base64\,/, '');
-        $('#photoStore').val(raw_image_data);
+        $('#identification_photo').val(raw_image_data);
     });
 
     $('#macamera').removeClass('d-block');
@@ -171,14 +178,14 @@ function take_snapshot()
 
     $('#results').removeClass('d-none');
 
-    $('#takephoto').removeClass('d-block');
-    $('#takephoto').addClass('d-none');
+    $('#prise').removeClass('d-block');
+    $('#prise').addClass('d-none');
 
-    $('#retakephoto').removeClass('d-none');
-    $('#retakephoto').addClass('d-block');
+    $('#reprise').removeClass('d-none');
+    $('#reprise').addClass('d-block');
 
-    $('#uploadphoto').removeClass('d-none');
-    $('#uploadphoto').addClass('d-block');
+    $('#miseenligne').removeClass('d-none');
+    $('#miseenligne').addClass('d-block');
 }
 </script>
 @endsection

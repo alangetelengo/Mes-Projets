@@ -37,7 +37,7 @@ class CreateIdentificationsTable extends Migration
             $table->string('identifiant_photo')->nullable();
             $table->timestamps();
 
-            $table->foreign('pays_id')->references('id')->on('pays')->onDelete('cascade');
+            $table->foreign('pays_id')->references('id_pays')->on('tr_pays')->onDelete('cascade');
             $table->foreign('etat_civils_id')->references('id')->on('etat_civils')->onDelete('cascade');
             $table->foreign('departements_id')->references('id')->on('departements')->onDelete('cascade');
             $table->foreign('type_identites_id')->references('id')->on('type_identites')->onDelete('cascade');

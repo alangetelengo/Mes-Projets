@@ -42,7 +42,7 @@
 <div class="main-menu menu-fixed menu-dark menu-accordion menu-shadow" data-scroll-to-active="true">
     <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-            <li class=" nav-item"><a href="#"><i class="la la-home"></i><span class="menu-title" data-i18n="Dashboard">Dashboard</span></a>
+            <li class=" nav-item"><a href="{{route('dashboard.index')}}"><i class="la la-home"></i><span class="menu-title" data-i18n="Dashboard">Dashboard</span></a>
                 
             </li>
             <li class=" nav-item"><a href="#"><i class="la la-users"></i><span class="menu-title" data-i18n="Templates">Users</span></a>

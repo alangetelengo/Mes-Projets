@@ -13,8 +13,8 @@ class CreatePaysTable extends Migration
      */
     public function up()
     {
-        Schema::create('pays', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('tr_pays', function (Blueprint $table) {
+            $table->increments('id_pays');
             $table->string('code_pays',7);
             $table->string('lib_pays_fr',70);
             $table->string('lib_pays_eng',70);
@@ -32,6 +32,6 @@ class CreatePaysTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pays');
+        Schema::dropIfExists('tr_pays');
     }
 }
