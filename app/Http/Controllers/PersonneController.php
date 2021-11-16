@@ -6,6 +6,9 @@ use App\Models\Pays;
 use App\Models\Personne;
 use Illuminate\Http\Request;
 use App\Http\Acsi\AcsiIdentification;
+use App\Models\SessionLog;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class PersonneController extends Controller
@@ -17,7 +20,8 @@ class PersonneController extends Controller
      */
     public function index()
     {
-        //
+        $personnes = Personne::all();
+        return view("acsi.identification.index", compact("personnes"));
     }
 
     /**
@@ -51,12 +55,20 @@ class PersonneController extends Controller
         $personne->nom_prenom_personne_contact = $request->nom_prenom_personne_contact;
         $personne->telephone_personne_contact = $request->telephone_personne_contact;
         $personne->email_personne_contact = $request->email_personne_contact;
-        $personne->num_piece_identite_personne_contat = $request->numero_piece_identite_personne_contact;
+        $personne->num_piece_identite_personne_contact = $request->numero_piece_identite_personne_contact;
         $personne->annee_naissance_personne = $request->annee_naissance_personne;
-        $personne->sequence = "A01";
+        $personne->ancien_id_vaccination = $request->ancien_id_vaccination;
+        $personne->ancien_id_laboratoire = $request->ancien_id_laboratoire;
+        $personne->rang_naissance = $request->rang_naissance;
+        $personne->numero_registre = $request->numero_registre;
+        $personne->numero_registre = $request->numero_registre;
+        $personne->id_session_log = Auth::user()->sessionlogs->last()->ID;
+
+        // $personne->sequence = "A01";
         $occurence = $this->getsequence();
         $personne->numero_personne = AcsiIdentification::uniqueId($personne,$occurence);
         $personne->save();
+        Log::channel('sircov')->info("Action : Création d'une identification par le user ".Auth::user()->agent->NOM_AGENT. " à ".now() ." par la session ".SessionLog::where('ID_USER',Auth::user()->id_user)->get()->last());
         return response()->json([
             "code"=>"200",
             "msg"=>"Identification effectuée avec succès",
@@ -113,7 +125,7 @@ class PersonneController extends Controller
 
     public function getsequence(){
         $seq = 0;
-        $personne = Personne::whereSequence("A01")->orderBy('id_personne','desc')->first();
+        $personne = Personne::where('ID_SESSION_LOG',Auth::user()->sessionlogs->last()->ID)->orderBy('ID_PERSONNE','DESC')->first();
         if($personne==null){
             $seq = $seq;
             return $seq +1;
@@ -134,15 +146,14 @@ class PersonneController extends Controller
         if($personne==null){
 
         }
-        $image = $request->personne_photo;
-        $image = base64_decode($image);
-    
-        $nom_image = $personne->numero_personne.'.jpeg';
-        $result = Storage::disk('public')->put($nom_image,$image);
-        
+        $image = $request->identification_photo;
+        $nom_image = $personne->NUMERO_PERSONNE.".jpeg";  
+        $result = Storage::disk('public')->put($nom_image, base64_decode($image));
+
+        //return $image;
     
         if($result) {
-            $personne->identifiant_photo = $nom_image;
+            $personne->photo = $nom_image;
             $personne->save();
             return "reussie";
         } else {

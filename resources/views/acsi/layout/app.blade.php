@@ -37,7 +37,7 @@
 
     <!-- BEGIN: Custom CSS-->
     <!-- END: Custom CSS-->
-
+    @toastr_css()
     @yield('styles')
 
 </head>
@@ -104,7 +104,8 @@
         });
     </script>
     @yield('scripts')
-
+    @toastr_js()
+    @toastr_render
 </body>
 <!-- END: Body-->
 

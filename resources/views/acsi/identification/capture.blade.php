@@ -1,6 +1,6 @@
 @extends('acsi.layout.app')
 @section('title')
-    {{$personne->prenom_personne}}
+    {{$personne->PRENOM_PERSONNE}}
 @endsection
 @section('styles')
 <link rel="stylesheet" href="{{asset('app-assets/css/components.css')}}">
@@ -70,7 +70,7 @@
     Webcam.set({
         width: 320,
         height: 240,
-        image_format: 'jpeg',
+        image_format: 'png',
         jpeg_quality: 90
     });
 
@@ -112,7 +112,7 @@
     $('#photoForm').on('submit', function(e) {
         e.preventDefault();
         $.ajax({
-            url: "{{env('APP_URL')}}/personne/{{$personne->id_personne}}/capture",
+            url: "{{env('APP_URL')}}/personne/{{$personne->ID_PERSONNE}}/capture",
             type: "POST",
             data: new FormData(this),
             contentType: false,

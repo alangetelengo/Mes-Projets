@@ -1,6 +1,6 @@
 @extends('acsi.layout.app')
 @section('title')
-    Liste des indentités
+    Liste des vaccinés
 @endsection
 @section('styles')
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/tables/datatable/datatables.min.css')}}">
@@ -17,11 +17,11 @@
                 <div class="col-xl-12 col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">Affichage Identifications</h4>
+                            <h4 class="card-title">Affichage vaccinations</h4>
                             <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                             <div class="heading-elements">
                                 <ul class="list-inline mb-0">
-                                    <li><a href="{{ route('personne.create') }}" class="btn btn-primary" style="color: white">Ajouter</a></li>
+                                    <li><a href="{{ route('vaccination.create')}}" class="btn btn-primary" style="color: white">Ajouter</a></li>
                                 </ul>
                                 
                             </div>
@@ -46,22 +46,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                                @forelse ($personnes as $personne)
-                                                    <tr>
-                                                        <td>{{$personne->NUMERO_PERSONNE}}</td>
-                                                        <td>{{$personne->NOM_PERSONNE}}</td>
-                                                        <td>{{$personne->PRENOM_PERSONNE}}</td>
-                                                        <td>{{$personne->SEXE}}</td>
-                                                        <td>{{$personne->NOM_PERE}}</td>
-                                                        <td>{{$personne->NOM_MERE}}</td>
-                                                        <td>{{$personne->PROFESSION}}</td>
-                                                        <td>{{$personne->pays->LIB_PAYS_FR}}</td>
-                                                        <td>{{ date('d-m-Y',strtotime($personne->created_at)) }}</td>
-                                                        <td>Actions</td>
-                                                    </tr>
-                                                @empty
-                                                    
-                                                @endforelse
+                                         
                                         </tbody>
                                         <tfoot>
                                             <tr>

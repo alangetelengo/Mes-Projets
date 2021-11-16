@@ -68,7 +68,7 @@
                                         <form class="form-horizontal" action="{{route('custom.login')}}" method="POST">
                                             @csrf
                                             <fieldset class="form-group position-relative has-icon-left">
-                                                <input type="email" class="form-control @error('email') is-invalid @enderror" id="user-name" value="{{old('email')}}" name="email" placeholder="Votre email" required>
+                                                <input type="text" class="form-control @error('email') is-invalid @enderror" id="user-name" value="{{old('email')}}" name="email" placeholder="Votre email" required>
                                                 <div class="form-control-position">
                                                     <i class="la la-user"></i>
                                                 </div>

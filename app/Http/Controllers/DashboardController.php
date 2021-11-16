@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SessionLog;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -22,35 +24,52 @@ class DashboardController extends Controller
 
     public function login(Request $request){
         
-        $request->validate([
-            "email"=>["required","email"],
-            "password"=>["required"]
-        ]);
-        
-        $email = $request->email;
-        $password = $request->password;
+        try{
+            $request->validate([
+                "email"=>["required","string"],
+                "password"=>["required"]
+            ]);
+            
+            $email = $request->email;
+            $password = $request->password;
+    
+            $user = User::where("login",$email)->first();
+            if($user==null){
+                toastr()->error("Login incorrecte");
+                return redirect()->back()->withInput();
+            }
+    
+            
 
-        $user = User::where("email",$email)->first();
-        if($user==null){
-            toastr()->error("Email incorrecte");
-            return redirect()->back()->withInput();
+           if(!Hash::check($password, $user->mot_de_passe)){
+               toastr()->error("Mot de passe incorrect");
+               return redirect()->back()->withInput();
+           }
+    
+           
+            if($user->supprimer == "1"){
+                toastr()->warning("Compte inactif");
+                return redirect()->back()->withInput();
+            }
+    
+            Auth::loginUsingId($user->id_user);
+            //Création d ela connexion
+            SessionLog::create([
+                "CODE"=>uniqid(),
+                "ID_APPAREIL"=>1,
+                "ID_USER"=>Auth::user()->id_user,
+                "CANAL"=>"WEB",
+                "ADRESSE_IP"=>$request->ip()
+            ]);
+
+            
+            
+            toastr()->success("Connexion réussie");
+            return redirect()->route('dashboard.index');
+
+        }catch(Exception $e){
+            toastr()->error($e->getMessage());
         }
-
-        if(!Hash::check($password, $user->password)){
-            toastr()->error("Mot de passe incorrecte");
-            return redirect()->back()->withInput();
-        }
-
-        if($user->active != 1){
-            toastr()->warning("Compte inactif");
-            return redirect()->back()->withInput();
-        }
-
-        //Création d ela connexion
-
-        Auth::loginUsingId($user->id);
-
-        return redirect()->route('dashboard.index');
     }
 
     /**

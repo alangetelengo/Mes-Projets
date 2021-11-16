@@ -14,7 +14,7 @@
         <div class="navbar-container content">
             <div class="collapse navbar-collapse" id="navbar-mobile">
                 <ul class="nav navbar-nav mr-auto float-left">
-                    <li class="nav-item d-none d-lg-block"><a class="nav-link nav-link-expand" href="#">Vous êtes connecté en tant que : {{Auth::user()->role->role}}</a></li>
+                    <li class="nav-item d-none d-lg-block"><a class="nav-link nav-link-expand" href="#">Vous êtes connecté en tant que : {{Auth::user()->groupes->first()->liB_GROUPE }}</a></li>
                     
                     
                 </ul>
@@ -22,7 +22,7 @@
                     
                     <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown"><span class="mr-1 user-name text-bold-700">
                     @auth
-                        {{ Auth::user()->prenom}} {{Auth::user()->nom }}
+                        {{ Auth::user()->agent->NOM_AGENT}} {{Auth::user()->agent->PRENOM_AGENT }}
                     @endauth    
                     </span><span class="avatar avatar-online"><img src="{{asset('app-assets/images/portrait/small/avatar-s-19.png')}}" alt="avatar"><i></i></span></a>
                         <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="user-profile.html"><i class="ft-user"></i> Editer profil</a>
@@ -47,19 +47,28 @@
             </li>
             <li class=" nav-item"><a href="#"><i class="la la-users"></i><span class="menu-title" data-i18n="Templates">Users</span></a>
                 <ul class="menu-content">
-                    @can('role.index')
+                    @can('Voir les statistiques groupes')
                     <li><a class="menu-item" href="#"><i></i><span data-i18n="Vertical">Rôles</span></a></li>
                     @endcan
-                    @can('user.index')
+                    @can('Afficher les utilisateurs')
                     <li><a class="menu-item" href="#"><i></i><span data-i18n="Vertical">Users</span></a></li>
                     @endcan
                 </ul>
             </li>
-                <li class=" nav-item"><a href="#"><i class="la la-users"></i><span class="menu-title" data-i18n="Templates">Identifications</span></a>
-                    <ul class="menu-content">
-                        <li><a class="menu-item" href="{{route('identification.index')}}"><i></i><span data-i18n="Vertical">Identification</span></a></li>
-                    </ul>
-                </li>
+            <li class=" nav-item"><a href="#"><i class="la la-users"></i><span class="menu-title" data-i18n="Templates">Appareils</span></a>
+                <ul class="menu-content">
+                    @can('Voir les statistiques groupes')
+                    <li><a class="menu-item" href="{{route('appareil.index')}}"><i></i><span data-i18n="Vertical">Les appareils</span></a></li>
+                    @endcan
+                </ul>
+            </li>
+                @can('Afficher les utilisateurs')
+                    <li class=" nav-item"><a href="#"><i class="la la-users"></i><span class="menu-title" data-i18n="Templates">Identifications</span></a>
+                        <ul class="menu-content">
+                            <li><a class="menu-item" href="{{route('personne.index')}}"><i></i><span data-i18n="Vertical">Identification</span></a></li>
+                        </ul>
+                    </li>
+                @endcan
         </ul>
     </div>
 </div>

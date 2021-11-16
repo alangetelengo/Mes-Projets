@@ -42,6 +42,17 @@ Route::middleware('auth')->group(function(){
         Route::get('{id}/capture','PersonneController@capture')->name('personne.capture');
         Route::put('{id}/capture','PersonneController@capturestore')->name('personne.capture.store');
     });
+
+
+    Route::prefix('appareil')->group(function(){
+        Route::get('/','AppareilController@index')->name('appareil.index');
+        Route::get('create','AppareilController@create')->name('appareil.create');
+        Route::post('store','AppareilController@store')->name('appareil.store');
+        Route::get('{id}/edit','AppareilController@edit')->name('appareil.edit');
+        Route::get('{id}/show','AppareilController@show')->name('appareil.show');
+        Route::put('{id}/update','AppareilController@update')->name('appareil.update');
+        Route::delete('{id}/destroy','AppareilController@destroy')->name('appareil.destroy');
+    });
 });
 
 Route::post('custom-login','DashboardController@login')->name('custom.login');

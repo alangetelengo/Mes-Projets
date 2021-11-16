@@ -62,6 +62,15 @@ $(".steps-validation").steps({
         var numero_piece_identite_personne_contact = $('#numero_piece_identite_personne_contact').val();
         var annee_naissance_personne = $('#annee_naissance_personne').val();
 
+        //nouveaux champs ajoutés
+
+        var ancien_id_vaccination = $('#ancien_id_vaccination').val();
+        var ancien_id_laboratoire = $('#ancien_id_laboratoire').val();
+        var ancien_id_prise_en_charge = $('#ancien_id_prise_en_charge').val();
+        var rang_naissance = $('#rang_naissance').val();
+        var numero_registre = $('#numero_registre').val();
+        
+
         $.post("store",{
             nom_personne:nom_personne,
             prenom_personne:prenom_personne,
@@ -76,7 +85,13 @@ $(".steps-validation").steps({
             telephone_personne_contact:telephone_personne_contact,
             email_personne_contact:email_personne_contact,
             numero_piece_identite_personne_contact:numero_piece_identite_personne_contact,
-            annee_naissance_personne:annee_naissance_personne
+            annee_naissance_personne:annee_naissance_personne,
+
+            ancien_id_vaccination:ancien_id_vaccination,
+            ancien_id_laboratoire:ancien_id_laboratoire,
+            ancien_id_prise_en_charge:ancien_id_prise_en_charge,
+            numero_registre:numero_registre,
+            rang_naissance:rang_naissance
 
         },function(data){
             var action = data.action;

@@ -6,21 +6,24 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Personne extends Model
+class Agent extends Model
 {
     use HasFactory;
-    protected $table = "t_personne";
-    protected $primaryKey = "id_personne";
+
+    protected $table = "tr_agent";
+    protected $primarykey = "id_agent";
     protected $guarded = [];
 
+    public $timestamps = false;
+
+
     /**
-     * Get the pays that owns the Personne
+     * Get the typeagent that owns the Agent
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function pays(): BelongsTo
+    public function typeagent(): BelongsTo
     {
-        return $this->belongsTo(Pays::class, 'ID_PAYS', 'ID_PAYS');
+        return $this->belongsTo(TypeAgent::class, 'id_type_agent', 'id_type_agent');
     }
-    
 }

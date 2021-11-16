@@ -25,9 +25,9 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::before(function($user,$permission){
+        Gate::before(function($user,$droitid){
 
-            return $user->permissions_strings()->contains($permission);
+            return $user->droitsids()->contains($droitid);
         });
     }
 }
