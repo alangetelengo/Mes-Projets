@@ -5,15 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Departement extends Model
+class LotDoseLivre extends Model
 {
     use HasFactory;
-    protected $table = "tr_departement";
-    protected $primaryKey = "ID_DEPARTEMENT";
+    protected $table = "t_lot_dose_livre";
+    protected $primaryKey = "ID_LOT_DOSE_LIVRE";
     protected $guarded = [];
 
     public $timestamps = false;
 
-
-    
 }

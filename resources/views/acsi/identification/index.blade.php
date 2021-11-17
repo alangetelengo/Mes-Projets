@@ -39,7 +39,6 @@
                                                 <th>Sexe</th>
                                                 <th>Nom père</th>
                                                 <th>Nom mère</th>
-                                                <th>Profession</th>
                                                 <th>Nationalité</th>
                                                 <th>Date</th>
                                                 <th>Actions</th>
@@ -54,10 +53,25 @@
                                                         <td>{{$personne->SEXE}}</td>
                                                         <td>{{$personne->NOM_PERE}}</td>
                                                         <td>{{$personne->NOM_MERE}}</td>
-                                                        <td>{{$personne->PROFESSION}}</td>
                                                         <td>{{$personne->pays->LIB_PAYS_FR}}</td>
                                                         <td>{{ date('d-m-Y',strtotime($personne->created_at)) }}</td>
-                                                        <td>Actions</td>
+                                                        <td>
+                                                            <div class="btn-group">
+                                                                <button type="button" class="btn btn-info  btn-sm dropdown-toggle btn-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                  Action
+                                                                </button>
+                                                                <div class="dropdown-menu">
+                                                                  
+                                                                    <a class="dropdown-item" href="{{route('personne.show',$personne->ID_PERSONNE)}}">Voir</a>    
+                                                                    <a class="dropdown-item" href="{{route('personne.edit',$personne->ID_PERSONNE)}}">Modifier</a>
+                                                                    <form action="{{route('personne.update',$personne->ID_PERSONNE)}}" method="POST">
+                                                                        @csrf
+                                                                        @method('DELETE')
+                                                                        <button type="submit" class="dropdown-item">Supprimer</button>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </td>
                                                     </tr>
                                                 @empty
                                                     
@@ -71,7 +85,6 @@
                                                 <th>Sexe</th>
                                                 <th>Nom père</th>
                                                 <th>Nom mère</th>
-                                                <th>Profession</th>
                                                 <th>Nationalité</th>
                                                 <th>Date</th>
                                                 <th>Actions</th>

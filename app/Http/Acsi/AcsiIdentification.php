@@ -18,7 +18,7 @@ class AcsiIdentification {
         $iprenom = substr($personne->prenom_personne,0,1);
         $inompere = substr($personne->nom_pere,0,1);
         $inommere = substr($personne->nom_mere,0,1);
-        $occurance = str_pad($lastid + 1,7,"0",STR_PAD_LEFT);
+        $occurance = str_pad(($lastid + 1),7,"0",STR_PAD_LEFT);
         $isexe = substr($personne->sexe,0,1);
         $ianneenaissance = substr($personne->date_naissance,2,2);
         $ianneeidentification = substr($personne->created_at,2,2);

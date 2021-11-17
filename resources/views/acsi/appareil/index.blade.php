@@ -53,9 +53,7 @@
                                                               Action
                                                             </button>
                                                             <div class="dropdown-menu">
-                                                              
                                                                 <a class="dropdown-item" href="{{route('appareil.show',$appareil->ID_APPAREIL)}}">Voir</a>
-                                                             
                                                                 <a class="dropdown-item" href="{{route('appareil.edit',$appareil->ID_APPAREIL)}}">Modifier</a>
                                                                 <form action="{{route('appareil.destroy',$appareil->ID_APPAREIL)}}" method="POST">
                                                                     @csrf
@@ -63,7 +61,7 @@
                                                                     <button type="submit" class="dropdown-item">Supprimer</button>
                                                                 </form>
                                                             </div>
-                                                          </div>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                             @empty

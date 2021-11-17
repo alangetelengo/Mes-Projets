@@ -6,22 +6,24 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Personne extends Model
+class Dose extends Model
 {
     use HasFactory;
-    protected $table = "t_personne";
-    protected $primaryKey = "ID_PERSONNE";
-    protected $guarded = [];
+    protected $table = "tr_dose";
+    protected $primaryKey = "ID_DOSE";
+    protected $guarded =[];
+
     public $timestamps = false;
 
     /**
-     * Get the pays that owns the Personne
+     * Get the typevaccin that owns the Dose
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function pays(): BelongsTo
+    public function typevaccin(): BelongsTo
     {
-        return $this->belongsTo(Pays::class, 'ID_PAYS', 'ID_PAYS');
+        return $this->belongsTo(TypeVaccin::class, 'ID_TYPE_VACCIN', 'ID_TYPE_VACCIN');
     }
+
     
 }

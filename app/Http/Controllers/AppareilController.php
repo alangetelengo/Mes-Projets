@@ -109,20 +109,20 @@ class AppareilController extends Controller
         }
 
         $request->validate([
-            "adresse_mac"=>["required","string"],
-            "code"=>["required","string"],
-            "sequence"=>["required","string"],
-            "libelle"=>["required","string"]
+            "ADRESSE_MAC"=>["required","string"],
+            "CODE"=>["required","string"],
+            "SEQ"=>["required","string"],
+            "LIBELLE"=>["required","string"]
         ]);
 
         try{
-            $app->adresse_mac = $request->adresse_mac;
-            $app->code = $request->code;
-            $app->sequence = $request->sequence;
-            $app->liebelle = $request->liebelle;
+            $app->ADRESSE_MAC = $request->ADRESSE_MAC;
+            $app->CODE = $request->CODE;
+            $app->SEQ = $request->SEQ;
+            $app->LIBELLE = $request->LIBELLE;
             $app->save();
             toastr()->success("Appareil modifié avec succès");
-            return redirect()->back();
+            return redirect()->route('appareil.index');
         }catch(Exception $e){
             toastr()->error($e->getMessage());
             return redirect()->back()->withInput();
@@ -145,7 +145,7 @@ class AppareilController extends Controller
 
         try{
             $appareil->delete();
-            toastr()->success("Apperil supprimé avec succès");
+            toastr()->success("Appareil supprimé avec succès");
             return redirect()->back();
         }catch(Exception $e){
             toastr()->error($e->getMessage());

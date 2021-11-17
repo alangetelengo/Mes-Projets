@@ -86,7 +86,13 @@ class PersonneController extends Controller
      */
     public function show($id)
     {
-        //
+        $personne = Personne::find($id);
+        if($personne==null){
+            toastr()->error("Impossible de charger cette page");
+            return redirect()->back();
+        }
+        
+        return view("acsi.identification.show",compact("personne"));
     }
 
     /**
@@ -97,7 +103,13 @@ class PersonneController extends Controller
      */
     public function edit($id)
     {
-        //
+        $pays = Pays::all();
+        $personne = Personne::find($id);
+        if($personne==null){
+            toastr()->error("Impossible de charger cette page");
+            return redirect()->back();
+        }
+        return view("acsi.identification.edit",compact("personne","pays"));
     }
 
     /**
@@ -109,7 +121,61 @@ class PersonneController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $app = Personne::find($id);
+        if($app==null){
+            toastr()->error("Impossible de charger cette page");
+            return redirect()->back();
+        }
+
+        $request->validate([
+            "PRENOM_PERSONNE"=>["required","string"],
+            "NOM_PERSONNE"=>["required","string"],
+            "NOM_JEUNE_FILLE"=>["required","string"],
+            "DATE_NAISSANCE"=>["required","string"],
+            "LIEU_NAISSANCE"=>["required","string"],
+            "ID_PAYS"=>["required","string"],
+            "NOM_PRENOM_PERSONNE_CONTACT"=>["required","string"],
+            "NOM_PERE"=>["required","string"],
+            "NOM_MERE"=>["required","string"],
+            "TELEPHONE_PERSONNE_CONTACT"=>["required","string"],
+            "EMAIL_PERSONNE_CONTACT"=>["required","string"],
+            "NUM_PIECE_IDENTITE_PERSONNE_CONTACT"=>["required","string"],
+            "NOM_PRENOM_PERSONNE_CONTACT"=>["required","string"],
+            "ANCIEN_ID_VACCINATION"=>["required","string"],
+            "ANCIEN_ID_LABORATOIRE"=>["required","string"],
+            "ANCIEN_ID_PRISE_EN_CHARGE"=>["required","string"],
+            "RANG_NAISSANCE"=>["required","string"],
+            "NUMERO_REGISTRE"=>["required","string"],
+            "TRANSFERER"=>["required","string"]
+        ]);
+
+        try{
+            $app->PRENOM_PERSONNE = $request->PRENOM_PERSONNE;
+            $app->NOM_PERSONNE = $request->NOM_PERSONNE;
+            $app->NOM_JEUNE_FILLE = $request->NOM_JEUNE_FILLE;
+            $app->DATE_NAISSANCE = $request->DATE_NAISSANCE;
+            $app->LIEU_NAISSANCE = $request->LIEU_NAISSANCE;
+            $app->ID_PAYS = $request->ID_PAYS;
+            $app->NOM_PRENOM_PERSONNE_CONTACT = $request->NOM_PRENOM_PERSONNE_CONTACT;
+            $app->NOM_PERE = $request->NOM_PERE;
+            $app->NOM_MERE = $request->NOM_MERE;
+            $app->TELEPHONE_PERSONNE_CONTACT = $request->TELEPHONE_PERSONNE_CONTACT;
+            $app->EMAIL_PERSONNE_CONTACT = $request->EMAIL_PERSONNE_CONTACT;
+            $app->NUM_PIECE_IDENTITE_PERSONNE_CONTACT = $request->NUM_PIECE_IDENTITE_PERSONNE_CONTACT;
+            $app->NOM_PRENOM_PERSONNE_CONTACT = $request->NOM_PRENOM_PERSONNE_CONTACT;
+            $app->ANCIEN_ID_VACCINATION = $request->ANCIEN_ID_VACCINATION;
+            $app->ANCIEN_ID_LABORATOIRE = $request->ANCIEN_ID_LABORATOIRE;
+            $app->ANCIEN_ID_PRISE_EN_CHARGE = $request->ANCIEN_ID_PRISE_EN_CHARGE;
+            $app->RANG_NAISSANCE = $request->RANG_NAISSANCE;
+            $app->NUMERO_REGISTRE = $request->NUMERO_REGISTRE;
+            $app->TRANSFERER = $request->TRANSFERER;
+            $app->save();
+            toastr()->success("Personne modifié avec succès");
+            return redirect()->route('personne.index');
+        }catch(Exception $e){
+            toastr()->error($e->getMessage());
+            return redirect()->back()->withInput();
+        }
     }
 
     /**
@@ -131,7 +197,7 @@ class PersonneController extends Controller
             return $seq +1;
         }
 
-        $seq = (int) $personne->id_personne + 1;
+        $seq = (int) $personne->ID_PERSONNE + 1;
         return $seq;
     }
 
@@ -143,9 +209,7 @@ class PersonneController extends Controller
 
     public function capturestore(Request $request,$id){
         $personne = Personne::find($id);
-        if($personne==null){
-
-        }
+        
         $image = $request->identification_photo;
         $nom_image = $personne->NUMERO_PERSONNE.".jpeg";  
         $result = Storage::disk('public')->put($nom_image, base64_decode($image));
@@ -153,7 +217,7 @@ class PersonneController extends Controller
         //return $image;
     
         if($result) {
-            $personne->photo = $nom_image;
+            $personne->PHOTO = $nom_image;
             $personne->save();
             return "reussie";
         } else {

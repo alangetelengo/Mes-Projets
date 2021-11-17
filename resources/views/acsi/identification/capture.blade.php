@@ -73,7 +73,7 @@
         image_format: 'png',
         jpeg_quality: 90
     });
-
+    
     $('#accescamera').on('click', function() {
         Webcam.reset();
         Webcam.on('error', function() {
@@ -84,6 +84,7 @@
                 icon: 'warning'
             });
         });
+        
         $('#photoModal').modal({
             backdrop:'static',
             keyboard:false

@@ -5,15 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Departement extends Model
+class TypeMapi extends Model
 {
     use HasFactory;
-    protected $table = "tr_departement";
-    protected $primaryKey = "ID_DEPARTEMENT";
-    protected $guarded = [];
-
+    protected $table = "tr_type_mapi";
+    protected $primaryKey = "ID_TYPE_MAPI";
     public $timestamps = false;
-
 
     
 }

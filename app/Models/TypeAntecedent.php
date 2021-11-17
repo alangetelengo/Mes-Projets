@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Departement extends Model
+class TypeAntecedent extends Model
 {
     use HasFactory;
-    protected $table = "tr_departement";
-    protected $primaryKey = "ID_DEPARTEMENT";
+    protected $table = "tr_type_antecedent";
+    protected $primaryKey = "ID_TYPE_ANTECEDENT";
     protected $guarded = [];
 
     public $timestamps = false;

@@ -42,7 +42,7 @@
                                                                 Prénom :
                                                                 {{-- <span class="danger">*</span> --}}
                                                             </label>
-                                                            <input type="text" class="form-control" id="prenom_personne" name="prenom_personne" onkeyup="recupereInfoPersonne();">
+                                                            <input type="text" class="form-control" id="prenom_personne" name="prenom_personne">
                                                         </div>
                                                     </div>
 
@@ -52,7 +52,7 @@
                                                                 Nom  :
                                                                 <span class="danger">*</span>
                                                             </label>
-                                                            <input type="text" class="form-control required" id="nom_personne" name="nom_peronne" onkeyup="recupereInfoPersonne();">
+                                                            <input type="text" class="form-control required" id="nom_personne" name="nom_peronne">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -64,7 +64,7 @@
                                                                 Nom de la jeune fille :
                                                                 {{-- <span class="danger">*</span> --}}
                                                             </label>
-                                                            <input type="text" class="form-control" id="nom_jeune_fille" name="nom_jeune_fille" onkeyup="recupereInfoPersonne();">
+                                                            <input type="text" class="form-control" id="nom_jeune_fille" name="nom_jeune_fille">
                                                         </div>
                                                     </div>
 
@@ -74,7 +74,7 @@
                                                                 Sexe :
                                                                 <span class="danger">*</span>
                                                             </label>
-                                                            <select class="custom-select form-control required" id="sexe" name="sexe" onkeyup="recupereInfoPersonne();">
+                                                            <select class="custom-select form-control required" id="sexe" name="sexe">
                                                                 <option value="">Selectionner</option>
                                                                 <option value="M">Masculin</option>
                                                                 <option value="F">Féminin</option>
@@ -88,7 +88,7 @@
                                                                 Date de naissance :
                                                                 {{-- <span class="danger">*</span> --}}
                                                             </label>
-                                                            <input type="date" class="form-control" id="date_naissance" name="date_naissance" onkeyup="recupereInfoPersonne();">
+                                                            <input type="date" class="form-control" id="date_naissance" name="date_naissance">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
@@ -97,7 +97,7 @@
                                                                     Lieu de naissance :
                                                                 {{-- <span class="danger">*</span> --}}
                                                             </label>
-                                                            <input type="text" class="form-control" id="lieu_naissance" name="lieu_naissance" onkeyup="recupereInfoPersonne();">
+                                                            <input type="text" class="form-control" id="lieu_naissance" name="lieu_naissance">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
@@ -193,7 +193,7 @@
                                                                 Ancien ID vaccination :
                                                                 {{-- <span class="danger">*</span> --}}
                                                             </label>
-                                                            <input type="text" class="form-control" id="numero_piece_identite_personne_contact" onkeyup="recupereInfoPersonne();">
+                                                            <input type="text" class="form-control" id="ancien_id_vaccination" onkeyup="recupereInfoPersonne();">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
@@ -202,7 +202,7 @@
                                                                 Ancien ID laboratoire :
                                                                 {{-- <span class="danger">*</span> --}}
                                                             </label>
-                                                            <input type="number" class="form-control" id="annee_naissance_personne" name="annee_naissance_personne" onkeyup="recupereInfoPersonne();">
+                                                            <input type="number" class="form-control" id="ancien_id_laboratoire" name="annee_naissance_personne" onkeyup="recupereInfoPersonne();">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -218,7 +218,7 @@
                                                                 Ancien ID prise en charge :
                                                                 {{-- <span class="danger">*</span> --}}
                                                             </label>
-                                                            <input type="text" class="form-control" id="numero_piece_identite_personne_contact" onkeyup="recupereInfoPersonne();">
+                                                            <input type="text" class="form-control" id="ancien_id_prise_en_charge" onkeyup="recupereInfoPersonne();">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
@@ -227,7 +227,7 @@
                                                                 Rang de naissance :
                                                                 {{-- <span class="danger">*</span> --}}
                                                             </label>
-                                                            <input type="number" class="form-control" id="annee_naissance_personne" name="annee_naissance_personne" onkeyup="recupereInfoPersonne();">
+                                                            <input type="number" class="form-control" id="rang_naissance" name="" onkeyup="recupereInfoPersonne();">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
@@ -236,7 +236,7 @@
                                                                 Numéro registre :
                                                                 {{-- <span class="danger">*</span> --}}
                                                             </label>
-                                                            <input type="text" class="form-control" id="numero_piece_identite_personne_contact" onkeyup="recupereInfoPersonne();">
+                                                            <input type="text" class="form-control" id="numero_registre">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
@@ -245,7 +245,7 @@
                                                                 Transferer :
                                                                 {{-- <span class="danger">*</span> --}}
                                                             </label>
-                                                            <input type="number" class="form-control" id="annee_naissance_personne" name="annee_naissance_personne" onkeyup="recupereInfoPersonne();">
+                                                            <input type="number" class="form-control" id="transferer" name="">
                                                         </div>
                                                     </div>
                                                 </div>

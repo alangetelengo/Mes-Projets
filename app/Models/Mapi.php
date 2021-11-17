@@ -6,22 +6,22 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Personne extends Model
+class Mapi extends Model
 {
     use HasFactory;
-    protected $table = "t_personne";
-    protected $primaryKey = "ID_PERSONNE";
+    protected $table = "t_mapi";
+    protected $primaryKey = "ID_MAPI";
     protected $guarded = [];
-    public $timestamps = false;
+
+    public $timestapms = false;
 
     /**
-     * Get the pays that owns the Personne
+     * Get the typemapi that owns the Mapi
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function pays(): BelongsTo
+    public function typemapi(): BelongsTo
     {
-        return $this->belongsTo(Pays::class, 'ID_PAYS', 'ID_PAYS');
+        return $this->belongsTo(TypeMapi::class, 'ID_TYPE_MAPI', 'ID_TYPE_MAPI');
     }
-    
 }
